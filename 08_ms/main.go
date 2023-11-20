@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"os"
 	"rosalind/utils"
-
-	// "strconv"
 	"strings"
 )
 
