@@ -48,6 +48,6 @@ func main() {
 	s := strings.Split(strings.TrimSpace(string(dat)), "\n")
 	n, _ := strconv.Atoi(strings.Split(s[0], " ")[0])
 
-	adjArr := utils.EdgeListToAdjacencyList(n, s[1:])
+	adjArr := utils.EdgesToUndirAdjList(n, s[1:])
 	fmt.Println("Number of components is", numConnectedComponents(n, adjArr))
 }
