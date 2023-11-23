@@ -32,7 +32,7 @@ func shortestPaths(edges [][]int) []int {
     if discovered[node] || !ok {
       continue
     }
-    
+
     // Otherwise, add children and new depths
     shortestLens[node] = depth
     discovered[node] = true
