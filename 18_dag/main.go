@@ -55,7 +55,7 @@ func edgesToInOutEdges(n int, arr []string) ([][]int, [][]int) {
 
     n1--; n2--
     inEdges[n1] = append(inEdges[n1], n2)
-    outEdges[n2] = append(inEdges[n2], n1)
+    outEdges[n2] = append(outEdges[n2], n1)
   }
   
   return inEdges, outEdges
