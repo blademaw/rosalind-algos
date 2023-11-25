@@ -20,3 +20,26 @@ func (q *Queue) Dequeue() interface{} {
 func (q *Queue) IsEmpty() bool {
   return len(q.elements) == 0
 }
+
+
+// Implements a generic stack interface
+type Stack struct {
+  elements []interface{}
+}
+
+func (s *Stack) Push(item interface{}) {
+  s.elements = append([]interface{}{item}, s.elements...)
+}
+
+func (s *Stack) Pop() interface{} {
+  if len(s.elements) == 0 {
+    return nil
+  }
+  item := s.elements[0]
+  s.elements = s.elements[1:]
+  return item
+}
+
+func (s *Stack) IsEmpty() bool {
+  return len(s.elements) == 0
+}
