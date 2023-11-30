@@ -62,6 +62,10 @@ func (pq *PriorityQueue) IsEmpty() bool {
   return len(pq.items) == 0
 }
 
+func (pq *PriorityQueue) GetItems() []int {
+  return pq.items
+}
+
 func (pq *PriorityQueue) Insert(item int, key int) {
   pq.items = append(pq.items, item)
   pq.keys[item] = key
@@ -78,7 +82,7 @@ func (pq *PriorityQueue) PopMin() (int, int, bool) {
 
   pq.items[0] = pq.items[len(pq.items) - 1]
   pq.items = pq.items[:len(pq.items) - 1]
-  delete(pq.keys, minElem)
+  // delete(pq.keys, minElem) // NOTE: Causes issues with duplicates!
   pq.downHeap(0)
 
   return minElem, minKey, true
