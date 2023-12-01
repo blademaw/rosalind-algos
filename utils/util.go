@@ -51,6 +51,24 @@ func EdgesToDirAdjList(n int, arr []string) [][]int {
   return edges
 }
 
+// Converts a list of strings in edge list format to a directed
+// adjacency list.
+func EdgeListToDirAdjList(arr []string) [][]int {
+  n, _ := strconv.Atoi(strings.Split(arr[0], " ")[0])
+
+  edges := make([][]int, n)
+  for _, edge := range arr[1:] {
+    nodes := strings.Split(edge, " ")
+    n1, _ := strconv.Atoi(nodes[0])
+    n2, _ := strconv.Atoi(nodes[1])
+
+    n1--; n2--
+    edges[n1] = append(edges[n1], n2)
+  }
+  
+  return edges
+}
+
 // Converts a list of strings in edge list format to an undirected
 // adjacency matrix representation.
 func EdgeListToUndirAdjMat(edges []string) [][]int {
