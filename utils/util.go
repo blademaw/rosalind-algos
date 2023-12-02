@@ -111,6 +111,27 @@ func EdgeListToUndirAdjList(arr []string) [][]int {
   return edges
 }
 
+// Converts a list of edges in adjacency list form to weights
+func WeightsFromEdgeList(arr []string) [][]int {
+  n, _ := strconv.Atoi(strings.Split(arr[0], " ")[0])
+
+  weights := make([][]int, n)
+  for i := range weights {
+    weights[i] = make([]int, n)
+  }
+
+  for _, edge := range arr[1:] {
+    nodes := strings.Split(edge, " ")
+    n1, _ := strconv.Atoi(nodes[0])
+    n2, _ := strconv.Atoi(nodes[1])
+    w, _  := strconv.Atoi(nodes[2])
+
+    weights[n1-1][n2-1] = w
+  }
+
+  return weights
+}
+
 // Loads a file and returns a list of strings.
 func ReadLines(filename string) (data []string, err error) {
   dat, err := os.ReadFile(filename)
