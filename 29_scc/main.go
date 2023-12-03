@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+// Creates an adjacency list that is the reverse of the supplied edge list.
 func reverseEdgeList(arr []string) [][]int {
 	n, _ := strconv.Atoi(strings.Split(arr[0], " ")[0])
 
