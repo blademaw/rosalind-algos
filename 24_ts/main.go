@@ -11,44 +11,43 @@ import (
 // and returning the nodes in descending order (sinks have smallest post
 // values, sources have largest).
 func topologicalSort(edges [][]int) []int {
-  n := len(edges)
+	n := len(edges)
 
-  // DFS, insert in order visited
-  discovered := make([]bool, n)
-  res, i := make([]int, n), n - 1
+	discovered := make([]bool, n)
+	res, i := make([]int, n), n-1
 
-  var dfs func(u int)
-  dfs = func(u int)  {
-    discovered[u] = true
+	var dfs func(u int)
+	dfs = func(u int) {
+		discovered[u] = true
 
-    for _, v := range edges[u] {
-      if !discovered[v] {
-        dfs(v)
-      }
-    }
-    res[i] = u + 1 // Rosalind formatting
-    i--
-  }
+		for _, v := range edges[u] {
+			if !discovered[v] {
+				dfs(v)
+			}
+		}
+		res[i] = u + 1 // Rosalind formatting
+		i--
+	}
 
-  for u := range edges {
-    if !discovered[u] {
-      dfs(u)
-    }
-  }
+	for u := range edges {
+		if !discovered[u] {
+			dfs(u)
+		}
+	}
 
-  return res
+	return res
 }
 
 func main() {
-  file := flag.String("file", "data.txt", "the file to be parsed as a DAG.")
-  flag.Parse()
+	file := flag.String("file", "data.txt", "the file to be parsed as a DAG.")
+	flag.Parse()
 
-  lines, err := utils.ReadLines(*file)
-  if err != nil {
-    panic(err)
-  }
+	lines, err := utils.ReadLines(*file)
+	if err != nil {
+		panic(err)
+	}
 
-  edges := utils.EdgeListToDirAdjList(lines)
+	edges := utils.EdgeListToDirAdjList(lines)
 
-  fmt.Println(topologicalSort(edges))
+	fmt.Println(topologicalSort(edges))
 }
