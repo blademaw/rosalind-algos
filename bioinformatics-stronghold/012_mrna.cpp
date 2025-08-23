@@ -8,7 +8,7 @@ int main (int argc, char *argv[]) {
   std::cin >> s;
 
   std::unordered_map<char, int> codonCounts;
-  for (auto [codon, c] : codonTable) {
+  for (auto [codon, c] : codon_table) {
     codonCounts[c] += 1;
   }
 

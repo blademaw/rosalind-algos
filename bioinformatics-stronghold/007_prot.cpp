@@ -2,7 +2,7 @@
 #include <string>
 #include <unordered_map>
 
-std::unordered_map<std::string, char> codonTable = {
+std::unordered_map<std::string, char> codon_table = {
   {"UUU", 'F'}, {"CUU", 'L'}, {"AUU", 'I'}, {"GUU", 'V'},
   {"UUC", 'F'}, {"CUC", 'L'}, {"AUC", 'I'}, {"GUC", 'V'},
   {"UUA", 'L'}, {"CUA", 'L'}, {"AUA", 'I'}, {"GUA", 'V'},
@@ -28,7 +28,7 @@ int main (int argc, char *argv[]) {
   std::string res;
   int i{}, j{};
   while (i <= s.length()) {
-    char c = codonTable[s.substr(i, 3)];
+    char c = codon_table[s.substr(i, 3)];
     if (c == '*') {
       break;
     } else {
