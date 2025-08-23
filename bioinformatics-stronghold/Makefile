@@ -14,18 +14,18 @@ INPUT_SUFFIX = _data.txt
 
 # Pattern rule: compile and run
 %: %.cpp %_data.txt
-	@$(CXX) $(CXXFLAGS) $< -o $@
-	@cat $@$(INPUT_SUFFIX) | ./$@
+	@$(CXX) $(CXXFLAGS) $< -o $@.o
+	@cat $@$(INPUT_SUFFIX) | ./$@.o
 
 # Pattern rule: compile only
 compile-%: %.cpp
 	@echo "Compiling $*..."
-	$(CXX) $(CXXFLAGS) $< -o $*
+	$(CXX) $(CXXFLAGS) $< -o $*.o
 
 # Pattern rule: run only (assumes executable exists)
 run-%: % %_data.txt
 	@echo "Running $* with input file $*$(INPUT_SUFFIX)..."
-	@echo $*$(INPUT_SUFFIX) | ./$*
+	@echo $*$(INPUT_SUFFIX) | ./$*.o
 
 # Clean up executables
 .PHONY: clean

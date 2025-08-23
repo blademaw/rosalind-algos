@@ -1,2 +1,2 @@
 bioinformatics-stronghold/utils/
-**/[^\.]*
+**/*.o
