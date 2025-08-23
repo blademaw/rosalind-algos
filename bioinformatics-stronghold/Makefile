@@ -12,15 +12,20 @@ CXX = g++
 CXXFLAGS = -std=c++20
 INPUT_SUFFIX = _data.txt
 
+# Function to detect if curl is needed
+define check_curl
+$(if $(shell grep -q "#include <curl/curl.h>" $1 && echo yes),-lcurl,)
+endef
+
 # Pattern rule: compile and run
 %: %.cpp %_data.txt
-	@$(CXX) $(CXXFLAGS) $< -o $@.o
+	@$(CXX) $(CXXFLAGS) $< -o $@.o $(call check_curl,$<)
 	@cat $@$(INPUT_SUFFIX) | ./$@.o
 
 # Pattern rule: compile only
 compile-%: %.cpp
 	@echo "Compiling $*..."
-	$(CXX) $(CXXFLAGS) $< -o $*.o
+	$(CXX) $(CXXFLAGS) $< -o $*.o $(call check_curl,$<)
 
 # Pattern rule: run only (assumes executable exists)
 run-%: % %_data.txt
