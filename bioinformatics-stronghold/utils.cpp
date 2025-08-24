@@ -1,6 +1,10 @@
 #pragma once
+#include <iostream>
+#include <istream>
 #include <string>
+#include <tuple>
 #include <unordered_map>
+#include <vector>
 
 std::unordered_map<std::string, char> codon_table = {
   {"UUU", 'F'}, {"CUU", 'L'}, {"AUU", 'I'}, {"GUU", 'V'},
@@ -43,3 +47,26 @@ std::unordered_map<char, float> mono_mass_table = {
   {'W', 186.07931},
   {'Y', 163.06333}
 };
+
+
+std::tuple<std::vector<std::string>, std::vector<std::string>> parse_rosalind_fasta_input(std::istream& in_stream) {
+  std::string line{}, cur{};
+  std::vector<std::string> names{}, seqs{};
+
+  // parse all FASTA strs
+  while (std::getline(in_stream, line)) {
+    if (line[0] == '>') {
+      if (cur.size() > 0) {
+        seqs.push_back(cur);
+      }
+
+      names.push_back(std::string(line.begin() + 1, line.end()));
+      cur = "";
+    } else {
+      cur += line;
+    }
+  }
+  seqs.push_back(cur);
+
+  return std::make_tuple(names, seqs);
+}
