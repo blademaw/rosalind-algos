@@ -2,7 +2,7 @@
 #include <unordered_set>
 #include "utils.cpp"
 
-std::string build_protein_str(const std::string& s) {
+std::string build_protein_str_(const std::string& s) {
   std::string res = "M";
   char codon;
   int j{0};
@@ -27,7 +27,7 @@ int main (int argc, char *argv[]) {
   std::unordered_set<std::string> candidates;
   for (int i{}; i < seq_rna.length()-3+1; i++) {
     if (seq_rna.substr(i, 3) == "AUG") {
-      auto candidate = build_protein_str(seq_rna.substr(i+3));
+      auto candidate = build_protein_str_(seq_rna.substr(i+3));
       if (candidate != "") {
         candidates.insert(candidate);
       }
@@ -35,7 +35,7 @@ int main (int argc, char *argv[]) {
   }
   for (int i{}; i < seq_rna_r.length()-3+1; i++) {
     if (seq_rna_r.substr(i, 3) == "AUG") {
-      auto candidate = build_protein_str(seq_rna_r.substr(i+3));
+      auto candidate = build_protein_str_(seq_rna_r.substr(i+3));
       if (candidate != "") {
         candidates.insert(candidate);
       }
