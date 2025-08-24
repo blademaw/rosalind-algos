@@ -49,7 +49,42 @@ std::unordered_map<char, float> mono_mass_table = {
 };
 
 
-std::tuple<std::vector<std::string>, std::vector<std::string>> parse_rosalind_fasta_input(std::istream& in_stream) {
+// Convert a DNA sequence into RNA
+std::string dna_to_rna(std::string s) {
+  for (int i = 0; i < s.length(); i++) {
+    if (s[i] == 'T') {
+      s[i] = 'U';
+    }
+  }
+  return s;
+}
+
+
+// Get the reverse complement of a DNA sequence
+std::string reverse_complement(std::string s) {
+  for (int i=0; i < s.length(); i++) {
+    switch (s[i]) {
+      case 'A': s[i] = 'T'; break;
+      case 'T': s[i] = 'A'; break;
+      case 'G': s[i] = 'C'; break;
+      case 'C': s[i] = 'G'; break;
+    }
+  }
+
+  for (int i=0; i < (int)s.length()/2; i++) {
+    char tmp_c = s[i];
+    s[i] = s[s.length()-i-1];
+    s[s.length()-i-1] = tmp_c;
+  }
+
+  return s;
+}
+
+
+// Get a list of names and corresponding sequences from a Rosalind-style FASTA
+// input
+std::tuple<std::vector<std::string>, std::vector<std::string>>
+parse_rosalind_fasta_input(std::istream& in_stream) {
   std::string line{}, cur{};
   std::vector<std::string> names{}, seqs{};
 
