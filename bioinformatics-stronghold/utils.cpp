@@ -59,6 +59,15 @@ std::string dna_to_rna(std::string s) {
   return s;
 }
 
+// Reverse a string
+std::string reverse_str(std::string s) {
+  for (int i=0; i < (int)s.length()/2; i++) {
+    char tmp_c = s[i];
+    s[i] = s[s.length()-i-1];
+    s[s.length()-i-1] = tmp_c;
+  }
+  return s;
+}
 
 // Get the reverse complement of a DNA sequence
 std::string reverse_complement(std::string s) {
@@ -71,11 +80,7 @@ std::string reverse_complement(std::string s) {
     }
   }
 
-  for (int i=0; i < (int)s.length()/2; i++) {
-    char tmp_c = s[i];
-    s[i] = s[s.length()-i-1];
-    s[s.length()-i-1] = tmp_c;
-  }
+  s = reverse_str(s);
 
   return s;
 }
