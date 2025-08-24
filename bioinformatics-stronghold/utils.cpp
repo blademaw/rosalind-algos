@@ -105,3 +105,25 @@ parse_rosalind_fasta_input(std::istream& in_stream) {
 
   return std::make_tuple(names, seqs);
 }
+
+
+// Build a protein string from an RNA string
+std::string build_protein_str(const std::string& s, bool start_with_M = true) {
+  std::string res;
+  if (start_with_M) {
+    res = "M";
+  }
+
+  char codon;
+  int j{0};
+  while (j < s.length()-3+1) {
+    codon = codon_table[s.substr(j, 3)];
+    if (codon == '*') {
+      return res;
+    }
+    res += codon;
+    j += 3;
+  }
+
+  return res;
+}
