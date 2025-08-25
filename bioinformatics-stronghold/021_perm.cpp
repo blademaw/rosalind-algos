@@ -1,28 +1,12 @@
 #include <iostream>
 #include <vector>
 
-void heaps_correct(std::vector<std::vector<int>>& sols, int k, std::vector<int>& a) {
-  if (k == 1) {
-    sols.push_back(a);
-  } else {
-    heaps_correct(sols, k-1, a);
-    for (int i = 0; i < k-1; i++) {
-      if (k % 2 == 0) {
-        std::swap(a[i], a[k-1]);
-      } else {
-        std::swap(a[0], a[k-1]);
-      }
-      heaps_correct(sols, k-1, a);
-    }
-  }
-}
-
 void permutations(std::vector<std::vector<int>>& sols, int k, std::vector<int>& a) {
   if (k == 1) {
     sols.push_back(a);
   } else {
     permutations(sols, k-1, a);
-    for (int i = 0; i < k-1; i++) {
+    for (int i{}; i < k - 1; i++) {
       if (k % 2 == 0) {
         std::swap(a[i], a[k-1]);
       } else {
@@ -49,7 +33,7 @@ int main (int argc, char *argv[]) {
   }
 
   std::vector<std::vector<int>> sols;
-  heaps_correct(sols, n, ns);
+  permutations(sols, n, ns);
 
   std::cout << sols.size() << "\n";
   for (const auto& s : sols) {
