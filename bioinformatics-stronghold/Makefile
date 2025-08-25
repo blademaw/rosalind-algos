@@ -9,7 +9,7 @@
 # Usage: make run-001_dna (run only, assumes already compiled)
 
 CXX = g++
-CXXFLAGS = -std=c++20
+CXXFLAGS = -std=c++20 -O2 -Wall
 INPUT_SUFFIX = _data.txt
 
 # Function to detect if curl is needed

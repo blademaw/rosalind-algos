@@ -18,7 +18,7 @@ void permutations(std::vector<std::vector<int>>& sols, int k, std::vector<int>& 
 }
 
 void print_arr(const std::vector<int>& a) {
-  for (int i{}; i < a.size(); i++) {
+  for (size_t i{}; i < a.size(); i++) {
     std::cout << a[i];
     if (i < a.size() - 1) std::cout << " ";
   }
@@ -39,7 +39,6 @@ int main (int argc, char *argv[]) {
   for (const auto& s : sols) {
     print_arr(s);
   }
-  // heaps_algorithm(n, ns);
 
   return 0;
 }
