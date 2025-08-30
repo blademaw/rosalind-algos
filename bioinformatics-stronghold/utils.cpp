@@ -51,7 +51,7 @@ std::unordered_map<char, float> mono_mass_table = {
 
 // Convert a DNA sequence into RNA
 std::string dna_to_rna(std::string s) {
-  for (int i = 0; i < s.length(); i++) {
+  for (size_t i = 0; i < s.length(); i++) {
     if (s[i] == 'T') {
       s[i] = 'U';
     }
@@ -69,15 +69,21 @@ std::string reverse_str(std::string s) {
   return s;
 }
 
+// Get the complement of a DNA base pair
+char complement_bp(const char& c) {
+  switch (c) {
+    case 'A': return 'T';
+    case 'T': return 'A';
+    case 'G': return 'C';
+    case 'C': return 'G';
+  }
+  return ' ';
+}
+
 // Get the reverse complement of a DNA sequence
 std::string reverse_complement(std::string s) {
-  for (int i=0; i < s.length(); i++) {
-    switch (s[i]) {
-      case 'A': s[i] = 'T'; break;
-      case 'T': s[i] = 'A'; break;
-      case 'G': s[i] = 'C'; break;
-      case 'C': s[i] = 'G'; break;
-    }
+  for (size_t i=0; i < s.length(); i++) {
+    s[i] = complement_bp(s[i]);
   }
 
   s = reverse_str(s);
@@ -120,7 +126,7 @@ std::string build_protein_str(const std::string& s, bool start_with_M = true) {
   }
 
   char codon;
-  int j{0};
+  size_t j{0};
   while (j < s.length()-3+1) {
     codon = codon_table[s.substr(j, 3)];
     if (codon == '*') {
